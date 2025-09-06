@@ -1,0 +1,14 @@
+{
+  "id": "ai-mod-generator",
+  "supportedversions": [202500115713],
+  "weight": 5,
+  "javaplugin": "net.mcreator.aimodgenerator.AIModGeneratorPlugin",
+  "info": {
+    "name": "AI Mod Generator",
+    "description": "Generate Minecraft mod elements using AI and web search through natural language prompts. Create items, blocks, recipes, textures, sounds, and more with ease.",
+    "version": "1.0.0",
+    "author": "Manus AI",
+    "credits": "Powered by advanced AI models for multimodal content generation"
+  }
+}
+

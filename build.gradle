@@ -1,0 +1,202 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group = 'net.mcreator.aimodgenerator'
+version = '1.0.0'
+base.archivesName = 'ai-mod-generator-plugin'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // JSON processing
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'org.json:json:20230618'
+    
+    // HTTP client for API calls
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    
+    // Apache Commons for utilities
+    implementation 'org.apache.commons:commons-lang3:3.13.0'
+    implementation 'commons-io:commons-io:2.13.0'
+    
+    // Logging
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    implementation 'ch.qos.logback:logback-classic:1.4.11'
+    
+    // Image processing
+    implementation 'org.imgscalr:imgscalr-lib:4.2'
+    
+    // Testing
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:5.6.0'
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs += ['-Xlint:unchecked', '-Xlint:deprecation']
+}
+
+jar {
+    manifest {
+        attributes(
+            'Implementation-Title': 'AI Mod Generator Plugin',
+            'Implementation-Version': version,
+            'Implementation-Vendor': 'MCreator AI Plugin Team',
+            'Main-Class': 'net.mcreator.aimodgenerator.AIModGeneratorPlugin'
+        )
+    }
+    
+    // Include all dependencies in the JAR
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    
+    // Exclude duplicate files
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    
+    // Set the output file name
+    archiveFileName = "${base.archivesName.get()}-${version}.jar"
+}
+
+// Create sources JAR
+task sourcesJar(type: Jar, dependsOn: classes) {
+    archiveClassifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+// Create Javadoc JAR
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    archiveClassifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+// Plugin distribution task
+task createPluginDistribution(type: Zip, dependsOn: jar) {
+    archiveFileName = "${base.archivesName.get()}-${version}-distribution.zip"
+    destinationDirectory = file("$buildDir/distributions")
+    
+    from jar.outputs.files
+    from file('README.md')
+    from file('LICENSE')
+    from file('plugin.json')
+    
+    into('docs') {
+        from file('docs')
+    }
+    
+    into('examples') {
+        from file('examples')
+    }
+}
+
+// Task to prepare plugin for MCreator installation
+task preparePlugin(type: Copy, dependsOn: jar) {
+    from jar.outputs.files
+    from file('plugin.json')
+    into "$buildDir/plugin"
+    
+    doLast {
+        println "Plugin prepared in: $buildDir/plugin"
+        println "Copy the contents to your MCreator plugins directory"
+    }
+}
+
+// Clean task
+clean {
+    delete "$buildDir/plugin"
+    delete "$buildDir/distributions"
+}
+
+// Publishing configuration
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            
+            artifact sourcesJar
+            artifact javadocJar
+            
+            pom {
+                name = 'AI Mod Generator Plugin for MCreator'
+                description = 'A comprehensive MCreator plugin that uses AI and web search to generate Minecraft mod elements through natural language prompts'
+                url = 'https://github.com/mcreator/ai-mod-generator-plugin'
+                
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+                
+                developers {
+                    developer {
+                        id = 'mcreator-team'
+                        name = 'MCreator Team'
+                        email = 'support@mcreator.net'
+                    }
+                }
+                
+                scm {
+                    connection = 'scm:git:git://github.com/mcreator/ai-mod-generator-plugin.git'
+                    developerConnection = 'scm:git:ssh://github.com:mcreator/ai-mod-generator-plugin.git'
+                    url = 'https://github.com/mcreator/ai-mod-generator-plugin/tree/main'
+                }
+            }
+        }
+    }
+}
+
+// Custom tasks for development
+task runTests(type: Test) {
+    useJUnit()
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+    }
+}
+
+task generateDocs(type: Javadoc) {
+    source = sourceSets.main.allJava
+    classpath = configurations.compileClasspath
+    destinationDir = file("$buildDir/docs/javadoc")
+    
+    options {
+        encoding = 'UTF-8'
+        charSet = 'UTF-8'
+        author = true
+        version = true
+        use = true
+        windowTitle = "AI Mod Generator Plugin API"
+        docTitle = "AI Mod Generator Plugin for MCreator"
+    }
+}
+
+// Task to check plugin compatibility
+task checkCompatibility {
+    doLast {
+        println "Checking plugin compatibility..."
+        println "Java Version: ${System.getProperty('java.version')}"
+        println "Gradle Version: ${gradle.gradleVersion}"
+        println "Plugin Version: ${version}"
+        println "Target MCreator Version: 2023.4+"
+        println "Compatibility check completed."
+    }
+}
+
+// Default tasks
+defaultTasks 'clean', 'build', 'preparePlugin'
+
