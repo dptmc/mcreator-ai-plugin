@@ -384,8 +384,8 @@ public class MultimodalAgentCore {
                 prompt.append(CustomInstructions.CODE_GENERATION_INSTRUCTIONS);
         }
         
-        // Add Fabric compatibility
-        prompt.append("\n").append(CustomInstructions.getFabricInstructions());
+        // Add Forge compatibility
+        prompt.append("\n").append(CustomInstructions.getForgeInstructions());
         
         // Add context from analysis
         prompt.append("\n\nProject Context:\n");

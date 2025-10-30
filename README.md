@@ -29,7 +29,7 @@ A comprehensive MCreator plugin that uses AI and web search to generate Minecraf
 - **Theme Consistency**: Maintains visual and gameplay coherence
 
 ### ⚙️ Technical Excellence
-- **Fabric 1.20.1**: Full support with future Forge compatibility
+- **Forge 1.20.1**: Full support with future Forge compatibility
 - **MCreator Integration**: Seamless workflow with existing projects
 - **Optimized Assets**: Properly formatted textures and sounds
 - **Error Handling**: Robust error recovery and user guidance
@@ -206,7 +206,7 @@ cd ai-mod-generator-plugin
 ## Roadmap
 
 ### Version 1.1
-- [ ] Forge 1.20.1 support
+- [ ] Fabric 1.20.1 support
 - [ ] Custom model generation
 - [ ] Advanced procedure templates
 - [ ] Multi-language support

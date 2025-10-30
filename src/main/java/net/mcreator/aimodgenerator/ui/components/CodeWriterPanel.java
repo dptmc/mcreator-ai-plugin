@@ -23,7 +23,7 @@ public class CodeWriterPanel extends JPanel {
     private JComboBox<String> elementTypeCombo;
     private JTextField elementNameField;
     private JTextArea descriptionArea;
-    private JComboBox<String> fabricVersionCombo;
+    private JComboBox<String> forgeVersionCombo;
     private JCheckBox writeToWorkspaceCheck;
     private JTextArea codeOutputArea;
     private JButton generateCodeButton;
@@ -59,13 +59,13 @@ public class CodeWriterPanel extends JPanel {
         descriptionArea.setToolTipText("Describe what you want this element to do");
         descriptionArea.setBorder(BorderFactory.createLoweredBevelBorder());
         
-        // Fabric version selection
-        String[] fabricVersions = {
+        // Forge version selection
+        String[] forgeVersions = {
             "1.20.1", "1.20.0", "1.19.4", "1.19.2", "1.18.2"
         };
-        fabricVersionCombo = new JComboBox<>(fabricVersions);
-        fabricVersionCombo.setSelectedItem("1.20.1");
-        fabricVersionCombo.setToolTipText("Select target Fabric version");
+        forgeVersionCombo = new JComboBox<>(forgeVersions);
+        forgeVersionCombo.setSelectedItem("1.20.1");
+        forgeVersionCombo.setToolTipText("Select target Forge version");
         
         // Write to workspace option
         writeToWorkspaceCheck = new JCheckBox("Write directly to MCreator workspace", true);
@@ -114,9 +114,9 @@ public class CodeWriterPanel extends JPanel {
         inputPanel.add(elementTypeCombo, gbc);
         
         gbc.gridx = 2;
-        inputPanel.add(new JLabel("Fabric Version:"), gbc);
+        inputPanel.add(new JLabel("Forge Version:"), gbc);
         gbc.gridx = 3;
-        inputPanel.add(fabricVersionCombo, gbc);
+        inputPanel.add(forgeVersionCombo, gbc);
         
         // Element name row
         gbc.gridx = 0; gbc.gridy = 1;
@@ -187,7 +187,7 @@ public class CodeWriterPanel extends JPanel {
         String elementType = (String) elementTypeCombo.getSelectedItem();
         String elementName = elementNameField.getText().trim();
         String description = descriptionArea.getText().trim();
-        String fabricVersion = (String) fabricVersionCombo.getSelectedItem();
+        String forgeVersion = (String) forgeVersionCombo.getSelectedItem();
         boolean writeToWorkspace = writeToWorkspaceCheck.isSelected();
         
         // Validation
@@ -209,7 +209,7 @@ public class CodeWriterPanel extends JPanel {
         codeOutputArea.setText("Generating code, please wait...");
         
         CompletableFuture<String> future = aiCore.generateDirectCode(
-            elementType, elementName, description, fabricVersion, writeToWorkspace
+            elementType, elementName, description, forgeVersion, writeToWorkspace
         );
         
         future.thenAccept(code -> {
@@ -287,7 +287,7 @@ public class CodeWriterPanel extends JPanel {
         descriptionArea.setText("");
         codeOutputArea.setText("");
         elementTypeCombo.setSelectedIndex(0);
-        fabricVersionCombo.setSelectedItem("1.20.1");
+        forgeVersionCombo.setSelectedItem("1.20.1");
         writeToWorkspaceCheck.setSelected(true);
         statusLabel.setText("Ready to generate code");
         statusLabel.setForeground(new Color(60, 60, 60));

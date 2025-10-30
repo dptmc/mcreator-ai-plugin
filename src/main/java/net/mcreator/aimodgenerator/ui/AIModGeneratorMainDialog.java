@@ -132,7 +132,7 @@ public class AIModGeneratorMainDialog extends JDialog {
         badgePanel.add(createBadge("🎨 Nano Banana", new Color(255, 140, 0)));
         badgePanel.add(createBadge("🎵 Free Audio", new Color(138, 43, 226)));
         badgePanel.add(createBadge("🔍 Web Search", new Color(220, 20, 60)));
-        badgePanel.add(createBadge("⚡ Fabric 1.20.1", new Color(30, 144, 255)));
+        badgePanel.add(createBadge("⚡ Forge 1.20.1", new Color(30, 144, 255)));
         
         header.add(titlePanel, BorderLayout.WEST);
         header.add(badgePanel, BorderLayout.EAST);
@@ -441,7 +441,7 @@ public class AIModGeneratorMainDialog extends JDialog {
         status.append("   - Status: Ready for enhanced generation\n\n");
         
         status.append("⚡ Minecraft Support:\n");
-        status.append("   - Fabric 1.20.1: Fully Supported ✅\n");
+        status.append("   - Forge 1.20.1: Fully Supported ✅\n");
         status.append("   - Forge Compatibility: Planned ✅\n");
         status.append("   - MCreator Integration: Active ✅\n");
         status.append("   - Status: Ready for mod creation\n\n");
@@ -567,7 +567,7 @@ public class AIModGeneratorMainDialog extends JDialog {
                       "✅ Free background removal APIs\n" +
                       "✅ Free audio generation (SFX & music)\n" +
                       "✅ Web search integration\n" +
-                      "✅ Fabric 1.20.1 support\n" +
+                      "✅ Forge 1.20.1 support\n" +
                       "✅ Multimodal capabilities\n\n" +
                       
                       "Tips:\n" +

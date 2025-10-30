@@ -55,7 +55,7 @@ public class GeminiAIService {
         // Apply MCreator-specific system instructions
         String systemPrompt = "You are an expert MCreator mod developer and Minecraft game designer. " +
                              "You specialize in creating balanced, creative, and technically sound mod elements for Minecraft. " +
-                             "Always provide detailed, practical solutions that work with MCreator and Fabric 1.20.1. " +
+                             "Always provide detailed, practical solutions that work with MCreator and Forge 1.20.1. " +
                              "Focus on gameplay balance, technical accuracy, and creative design.";
         
         String fullPrompt = systemPrompt + "\n\nUser Request: " + prompt;
@@ -340,7 +340,7 @@ public class GeminiAIService {
         
         codePrompt.append("You are an expert MCreator mod developer. Generate complete, functional code for a ");
         codePrompt.append(elementType).append(" named '").append(elementName).append("'. ");
-        codePrompt.append("The code should be compatible with Fabric 1.20.1 and follow MCreator best practices. ");
+        codePrompt.append("The code should be compatible with Forge 1.20.1 and follow MCreator best practices. ");
         codePrompt.append("Include all necessary imports, proper class structure, and MCreator annotations. ");
         
         if (analysis.getTheme() != null) {
@@ -375,7 +375,7 @@ public class GeminiAIService {
         String systemPrompt = String.format(
             "You are an expert Minecraft modder using MCreator. Generate detailed %s specifications " +
             "including all necessary properties, NBT data, and configuration. " +
-            "Focus on balanced gameplay and compatibility with Minecraft 1.20.1 and Fabric. " +
+            "Focus on balanced gameplay and compatibility with Minecraft 1.20.1 and Forge. " +
             "Provide specific values for all properties and ensure MCreator compatibility.",
             elementType
         );

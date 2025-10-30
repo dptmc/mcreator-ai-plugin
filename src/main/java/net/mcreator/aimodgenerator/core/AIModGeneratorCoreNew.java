@@ -239,12 +239,12 @@ public class AIModGeneratorCoreNew {
      * @param elementType Type of element to generate
      * @param elementName Name of the element
      * @param description Description of the element
-     * @param fabricVersion Target Fabric version (default: 1.20.1)
+     * @param forgeVersion Target Forge version (default: 1.20.1)
      * @param writeToWorkspace Whether to write directly to MCreator workspace
      * @return Generated code
      */
     public CompletableFuture<String> generateDirectCode(String elementType, String elementName, 
-                                                       String description, String fabricVersion, 
+                                                       String description, String forgeVersion,
                                                        boolean writeToWorkspace) {
         return CompletableFuture.supplyAsync(() -> {
             try {
@@ -269,9 +269,9 @@ public class AIModGeneratorCoreNew {
                         instructions = CustomInstructions.CODE_GENERATION_INSTRUCTIONS;
                 }
                 
-                // Add Fabric compatibility instructions
+                // Add Forge compatibility instructions
                 String fullPrompt = instructions + "\n" + 
-                                  CustomInstructions.getFabricInstructions() + 
+                                  CustomInstructions.getForgeInstructions() +
                                   "\n\nGenerate code for a " + elementType + " named '" + elementName + 
                                   "' with the following description: " + description;
                 
@@ -342,7 +342,7 @@ public class AIModGeneratorCoreNew {
                "Texture Generator (Nano Banana): Active\n" +
                "Sound Generator: Active\n" +
                "Model Generator: Active\n" +
-               "Fabric 1.20.1 Support: Enabled\n" +
+               "Forge 1.20.1 Support: Enabled\n" +
                "Workspace Integration: " + (workspace != null ? "Connected" : "Not Connected");
     }
     

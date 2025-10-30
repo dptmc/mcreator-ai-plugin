@@ -12,7 +12,7 @@ public class CustomInstructions {
     public static final String MCREATOR_SYSTEM_PROMPT = 
         "You are an expert MCreator mod developer and Minecraft game designer. " +
         "You specialize in creating balanced, creative, and technically sound mod elements for Minecraft. " +
-        "Always provide detailed, practical solutions that work with MCreator and Fabric 1.20.1. " +
+        "Always provide detailed, practical solutions that work with MCreator and Forge 1.20.1. " +
         "Focus on gameplay balance, technical accuracy, and creative design. " +
         "Generate complete, functional code that can be directly used in MCreator without modifications. " +
         "Include proper imports, class structure, annotations, and follow MCreator best practices.";
@@ -55,7 +55,7 @@ public class CustomInstructions {
      */
     public static final String CODE_GENERATION_INSTRUCTIONS = 
         "Generate complete, functional Java code for MCreator mod elements. " +
-        "Ensure compatibility with Fabric 1.20.1 and MCreator's code structure. " +
+        "Ensure compatibility with Forge 1.20.1 and MCreator's code structure. " +
         "Include all necessary imports, proper class hierarchy, and MCreator annotations. " +
         "Follow Minecraft modding best practices and ensure balanced gameplay. " +
         "The code should be ready to compile and run without modifications.";
@@ -202,14 +202,14 @@ public class CustomInstructions {
     }
     
     /**
-     * Gets Fabric 1.20.1 specific instructions
-     * @return Fabric compatibility instructions
+     * Gets Forge 1.20.1 specific instructions
+     * @return Forge compatibility instructions
      */
-    public static String getFabricInstructions() {
-        return "Ensure full compatibility with Fabric 1.20.1 mod loader. " +
-               "Use Fabric API features and follow Fabric modding conventions. " +
-               "Include proper fabric.mod.json configuration and dependencies. " +
-               "Use Fabric's registry system and lifecycle events. " +
+    public static String getForgeInstructions() {
+        return "Ensure full compatibility with Forge 1.20.1 mod loader. " +
+               "Use Forge API features and follow Forge modding conventions. " +
+               "Include proper META-INF/mods.toml configuration and dependencies. " +
+               "Use Forge's registry system and lifecycle events. " +
                "Ensure client-server compatibility and proper networking.";
     }
     
